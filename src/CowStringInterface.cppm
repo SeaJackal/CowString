@@ -5,21 +5,21 @@ import std;
 namespace sea_jackal
 {
 
-export class CowString
+export class CowString final
 {
 public:
     class SymbolModifier;
 
     explicit CowString(std::string_view value);
-    CowString(const CowString &other);
-    CowString &operator=(const CowString &other);
+    CowString(const CowString &other) noexcept;
+    CowString &operator=(const CowString &other) noexcept;
     ~CowString() noexcept;
 
     [[nodiscard]] operator std::string() const;
 
     [[nodiscard]] CowString DeepCopy() const;
 
-    SymbolModifier operator[](std::size_t index);
+    SymbolModifier operator[](std::size_t index) noexcept;
 
 private:
     void Detach();

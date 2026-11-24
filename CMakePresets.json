@@ -32,7 +32,6 @@
             "name": "benchmarks",
             "displayName": "Release benchmarks",
             "inherits": "release",
-            "binaryDir": "${sourceDir}/build/benchmarks",
             "cacheVariables": {
                 "BUILD_TESTING": "OFF",
                 "COWSTRING_BUILD_BENCHMARKS": "ON"

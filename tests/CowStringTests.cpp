@@ -104,5 +104,12 @@ TEST(CowStringTest, CopyOutlivesOriginal)
     EXPECT_EQ(static_cast<std::string>(copy), "jello");
 }
 
+TEST(CowStringTest, AssigmentLeftAssociative)
+{
+    CowString original("abc");
+    (original[0] = 'x') = 'y';
+    EXPECT_EQ(static_cast<std::string>(original), "ybc");
+}
+
 } // namespace
 } // namespace sea_jackal

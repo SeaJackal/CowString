@@ -6,12 +6,12 @@ import :String;
 namespace sea_jackal
 {
 
-class CowString::SymbolModifier
+class CowString::SymbolModifier final
 {
 public:
-    SymbolModifier(CowString &cow_str, std::size_t index);
+    SymbolModifier(CowString &cow_str, std::size_t index) noexcept;
 
-    operator char() const;
+    operator char() const noexcept;
 
     SymbolModifier &operator=(char symbol);
 
