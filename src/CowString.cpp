@@ -1,6 +1,5 @@
 module;
 #include <cassert>
-#include <iterator>
 
 module CowString;
 
@@ -39,7 +38,7 @@ CowString &CowString::operator=(const CowString &other) noexcept
     {
         return *this;
     }
-    this->~CowString();
+    Destroy();
     data_ = other.data_;
     ref_counter_ = other.ref_counter_;
     size_ = other.size_;
@@ -47,15 +46,7 @@ CowString &CowString::operator=(const CowString &other) noexcept
     return *this;
 }
 
-CowString::~CowString() noexcept
-{
-    (*ref_counter_)--;
-    if (*ref_counter_ == 0)
-    {
-        delete ref_counter_;
-        delete[] data_;
-    }
-}
+CowString::~CowString() noexcept { Destroy(); }
 
 CowString::operator std::string() const
 {
@@ -78,6 +69,16 @@ void CowString::Detach()
 {
     auto new_string = DeepCopy();
     *this = new_string;
+}
+
+void CowString::Destroy()
+{
+    (*ref_counter_)--;
+    if (*ref_counter_ == 0)
+    {
+        delete ref_counter_;
+        delete[] data_;
+    }
 }
 
 } // namespace sea_jackal

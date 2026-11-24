@@ -22,6 +22,7 @@ public:
     SymbolModifier operator[](std::size_t index) noexcept;
 
 private:
+    void Destroy();
     void Detach();
 
     char *data_;
